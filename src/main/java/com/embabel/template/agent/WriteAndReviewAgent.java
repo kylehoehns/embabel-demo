@@ -22,9 +22,10 @@ import com.embabel.agent.api.common.OperationContext;
 import com.embabel.agent.api.common.PromptRunner;
 import com.embabel.agent.domain.io.UserInput;
 import com.embabel.agent.domain.library.HasContent;
-import com.embabel.agent.prompt.Persona;
+import com.embabel.agent.prompt.persona.Persona;
 import com.embabel.common.ai.model.AutoModelSelectionCriteria;
 import com.embabel.common.ai.model.LlmOptions;
+import com.embabel.common.ai.prompt.PromptContributionLocation;
 import com.embabel.common.core.types.Timestamped;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
@@ -36,17 +37,21 @@ import java.time.format.DateTimeFormatter;
 
 
 abstract class Personas {
-    static final Persona WRITER =  Persona.create(
+    static final Persona WRITER = Persona.Companion.create(
             "Roald Dahl",
             "A creative storyteller who loves to weave imaginative tales that are a bit unconventional",
             "Quirky",
-            "Create memorable stories that captivate the reader's imagination."
+            "Create memorable stories that captivate the reader's imagination.",
+            "",
+            PromptContributionLocation.BEGINNING
     );
-static final Persona REVIEWER =  Persona.Companion.create(
+    static final Persona REVIEWER = Persona.Companion.create(
             "Media Book Review",
             "New York Times Book Reviewer",
             "Professional and insightful",
-            "Help guide readers toward good stories"
+            "Help guide readers toward good stories",
+            "",
+            PromptContributionLocation.BEGINNING
     );
 }
 
