@@ -2,7 +2,7 @@
 setlocal
 
 set AGENT_APPLICATION=..
-set SPRING_PROFILES_ACTIVE=shell,starwars,docker-desktop
+set SPRING_PROFILES_ACTIVE=shell,severance
 
 call .\support\agent.bat
 
