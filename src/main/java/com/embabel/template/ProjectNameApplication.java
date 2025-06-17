@@ -15,33 +15,13 @@
  */
 package com.embabel.template;
 
-import com.embabel.common.util.WinUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
-@SpringBootApplication(
-        scanBasePackages = {
-                "com.embabel.agent",
-                "com.embabel.template"
-        }
-)
-@ConfigurationPropertiesScan(
-        basePackages = {
-                "com.embabel.agent",
-                "com.embabel.template"
-        }
-)
+@SpringBootApplication
+@ConfigurationPropertiesScan("com.embabel.template")
 class ProjectNameApplication {
-
-    static {
-        if (WinUtils.IS_OS_WINDOWS()) {
-            // Set console to UTF-8 on Windows
-            // This is necessary to display non-ASCII characters correctly
-            WinUtils.CHCP_TO_UTF8();
-        }
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(ProjectNameApplication.class, args);
     }
