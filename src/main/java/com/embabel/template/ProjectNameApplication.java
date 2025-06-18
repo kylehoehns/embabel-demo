@@ -17,10 +17,8 @@ package com.embabel.template;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 @SpringBootApplication
-@ConfigurationPropertiesScan("com.embabel.template")
 class ProjectNameApplication {
     public static void main(String[] args) {
         SpringApplication.run(ProjectNameApplication.class, args);
