@@ -27,7 +27,7 @@ Add your magic here!
 Run the shell script to start Embabel under Spring Shell:
 
 ```bash
-./shell.sh
+/scripts/shell.sh
 ```
 There is a single example agent, `WriteAndReviewAgent`. 
 It will be under your package name.
