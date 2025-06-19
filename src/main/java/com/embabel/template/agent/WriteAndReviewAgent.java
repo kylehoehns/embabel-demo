@@ -37,7 +37,7 @@ import java.time.format.DateTimeFormatter;
 
 
 abstract class Personas {
-    static final Persona WRITER = Persona.Companion.create(
+    static final Persona WRITER = Persona.create(
             "Roald Dahl",
             "A creative storyteller who loves to weave imaginative tales that are a bit unconventional",
             "Quirky",
@@ -45,7 +45,7 @@ abstract class Personas {
             "",
             PromptContributionLocation.BEGINNING
     );
-    static final Persona REVIEWER = Persona.Companion.create(
+    static final Persona REVIEWER = Persona.create(
             "Media Book Review",
             "New York Times Book Reviewer",
             "Professional and insightful",
@@ -126,7 +126,7 @@ class WriteAndReviewAgent {
                 ).trim(), Story.class);
     }
 
-    @AchievesGoal(description="The user has been greeted")
+    @AchievesGoal(description="The story has been crafted and reviewed by a book reviewer")
     @Action
     ReviewedStory reviewStory(UserInput userInput, Story story, OperationContext context) {
         String review = context.promptRunner()
