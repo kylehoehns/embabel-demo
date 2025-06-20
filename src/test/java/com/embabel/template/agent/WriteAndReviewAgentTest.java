@@ -11,8 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class WriteAndReviewAgentTest {
-
-
+    
     @Test
     void testWriteAndReviewAgent() {
         var agent = new WriteAndReviewAgent(200, 400);
