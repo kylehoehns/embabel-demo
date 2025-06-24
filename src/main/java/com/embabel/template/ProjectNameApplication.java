@@ -17,13 +17,14 @@ package com.embabel.template;
 
 import com.embabel.agent.config.annotation.EnableAgentShell;
 import com.embabel.agent.config.annotation.EnableAgents;
+import com.embabel.agent.config.annotation.LoggingThemes;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
 @EnableAgentShell
-@EnableAgents(loggingTheme = "starwars")
+@EnableAgents(loggingTheme = LoggingThemes.STAR_WARS)
 class ProjectNameApplication {
     public static void main(String[] args) {
         SpringApplication.run(ProjectNameApplication.class, args);
