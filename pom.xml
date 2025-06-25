@@ -2,11 +2,11 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.0</version>
+        <version>3.5.3</version>
         <relativePath/> <!-- Lookup parent from repository -->
     </parent>
     <groupId>com.embabel.template</groupId>
@@ -23,7 +23,7 @@
 
     <dependencies>
 
-        <!-- Main Dependencies --> 
+        <!-- Main Dependencies -->
         <dependency>
             <groupId>com.embabel.agent</groupId>
             <artifactId>embabel-agent-starter</artifactId>
@@ -36,7 +36,7 @@
             <version>${embabel-agent.version}</version>
         </dependency>
 
-        
+
         <!-- Unit and Integration Testing -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -51,7 +51,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>   
+            </plugin>
         </plugins>
     </build>
 
