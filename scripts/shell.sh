@@ -2,9 +2,9 @@
 
 export AGENT_APPLICATION=..
 
-#export MAVE_PROFILE=enable-mcp
+#export MAVEN_PROFILE=enable-mcp
 
-./support/check_env.sh
+./support/check_env.sh || exit 1
 
 cd ..
 mvn -Dmaven.test.skip=true spring-boot:run
