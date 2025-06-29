@@ -35,7 +35,6 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
-
 abstract class Personas {
     static final Persona WRITER = Persona.create(
             "Roald Dahl",
@@ -106,26 +105,6 @@ class WriteAndReviewAgent {
         this.reviewWordCount = reviewWordCount;
     }
 
-    @Action
-    Story craftStory(UserInput userInput) {
-        return PromptRunner.usingLlm(
-                 LlmOptions.fromCriteria(AutoModelSelectionCriteria.INSTANCE)
-                        .withTemperature(0.9) // Higher temperature for more creative output
-        ).withPromptContributor(Personas.WRITER)
-                .createObject(String.format("""
-                Craft a short story in %d words or less.
-                The story should be engaging and imaginative.
-                Use the user's input as inspiration if possible.
-                If the user has provided a name, include it in the story.
-
-                # User input
-                %s
-                """,
-                        storyWordCount,
-                        userInput.getContent()
-                ).trim(), Story.class);
-    }
-
     @AchievesGoal(description="The story has been crafted and reviewed by a book reviewer")
     @Action
     ReviewedStory reviewStory(UserInput userInput, Story story, OperationContext context) {
@@ -154,5 +133,25 @@ class WriteAndReviewAgent {
                 review,
                 Personas.REVIEWER
         );
+    }
+
+    @Action
+    Story craftStory(UserInput userInput) {
+        return PromptRunner.usingLlm(
+                 LlmOptions.fromCriteria(AutoModelSelectionCriteria.INSTANCE)
+                        .withTemperature(0.9) // Higher temperature for more creative output
+        ).withPromptContributor(Personas.WRITER)
+                .createObject(String.format("""
+                Craft a short story in %d words or less.
+                The story should be engaging and imaginative.
+                Use the user's input as inspiration if possible.
+                If the user has provided a name, include it in the story.
+
+                # User input
+                %s
+                """,
+                        storyWordCount,
+                        userInput.getContent()
+                ).trim(), Story.class);
     }
 }
