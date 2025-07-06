@@ -48,4 +48,7 @@ When the Embabel shell comes up, use the story agent like this:
 x "Tell me a story about...[your topic]"
 ```
 
+## Contributors
+
+[![Embabel contributors](https://contrib.rocks/image?repo=embabel/java-agent-template)](https://github.com/embabel/java-agent-template/graphs/contributors)
 
