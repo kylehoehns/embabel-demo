@@ -48,6 +48,8 @@ When the Embabel shell comes up, use the story agent like this:
 x "Tell me a story about...[your topic]"
 ```
 
+## A2A Support
+
 Embabel integrates with the [A2A](https://github.com/google-a2a/A2A) protocol, allowing you to connect to other
 A2A-enabled agents and
 services.
