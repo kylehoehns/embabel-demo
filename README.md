@@ -62,7 +62,7 @@ You'll need the following environment variable:
 
 - `GOOGLE_STUDIO_API_KEY`: Your Google Studio API key, which is used for Gemini.
 
-Start the Google A2A web interface using the `a2a` Docker profile:
+Start the Google A2A web interface using Docker compose:
 
 ```bash
 docker compose up
