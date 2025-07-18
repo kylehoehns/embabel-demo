@@ -11,6 +11,8 @@ import com.embabel.agent.api.common.StuckHandlingResultCode;
 import com.embabel.agent.core.AgentProcess;
 import com.embabel.agent.domain.io.UserInput;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 @Agent(description = "Assign field positions to a list of baseball players to create a complete lineup")
 public class LineupAgent implements StuckHandler {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(LineupAgent.class);
     private static final String LLM_CALLS = "llmCalls";
     private static final String VALID_LINEUP = "validLineup";
     private static final String CAN_CALL_LLM = "canCallLlm";
@@ -38,20 +41,21 @@ public class LineupAgent implements StuckHandler {
             "Fill out a complete lineup using these names: Daniel, Ava, Ryan, Zoe, Leo, Grace, Max, Chloe, Jack"
         }
     )
-    @Action
+    @Action(
+        pre = {VALID_LINEUP}
+    )
     Lineup buildLineup(PotentialLineup lineup) {
+        LOGGER.info("buildLineup called");
         return new Lineup(lineup.players());
     }
 
     @Action(
         canRerun = true,
-// TODO: If we could get this to work that'd be awesome. Works in shell mode. Not MCP.
-// goal is to only invoke this method 3 times max so we don't sit in a loop and waste tokens if the
-// llm never generates a valid lineup.
-//        pre = {CAN_CALL_LLM},
+        pre = {CAN_CALL_LLM},
         post = {VALID_LINEUP}
     )
     PotentialLineup generatePotentialLineup(UserInput userInput, OperationContext context) {
+        LOGGER.info("generatePotentialLineup called");
         int llmCalls = getLlmCalls(context);
         setLlmCalls(context, llmCalls + 1);
 
@@ -77,6 +81,7 @@ public class LineupAgent implements StuckHandler {
     @Condition(name = CAN_CALL_LLM)
     @Action
     public boolean canCallLlm(OperationContext context) {
+        LOGGER.info("canCallLlm called");
         int llmCalls = getLlmCalls(context);
         return llmCalls <= 3;
     }
@@ -84,7 +89,17 @@ public class LineupAgent implements StuckHandler {
     @Condition(name = VALID_LINEUP)
     @Action
     public boolean isValidLineup(PotentialLineup lineup) {
-        return lineup.players().size() == 9;
+        LOGGER.info("isValidLineup called");
+        return lineup.players().size() >= 9;
+    }
+
+    @Action(post = {CAN_CALL_LLM})
+    public void checkLlmEligibility(OperationContext context) {
+        // This is here to set world state prior to initial calls
+        LOGGER.info("checkLlmEligibility called");
+        if (context.get(LLM_CALLS) == null) {
+            setLlmCalls(context, 0);
+        }
     }
 
     private int getLlmCalls(OperationContext context) {
